@@ -1,4 +1,4 @@
-import { IExpirationOptionsFactory } from 'src/CacheManagerExpirationFactory/IExpirationOptionsFactory';
+import { IExpirationOptionsFactory } from '../CacheManagerExpirationFactory/IExpirationOptionsFactory';
 import { ICacheManager } from "../CacheManager/ICacheManager";
 import { IExpirationOptions } from "../ExpirationOptions/IExpirationOptions";
 import { IStore } from "../Store/IStore";
