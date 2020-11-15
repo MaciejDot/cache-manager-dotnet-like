@@ -1,6 +1,6 @@
 {
   "name": "cache-manager-dotnet-like",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Package for frontend caching",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
@@ -11,7 +11,7 @@
   },
   "sideEffects": false,
   "files": [
-    "dist", 
+    "dist",
     "types"
   ],
   "keywords": [
