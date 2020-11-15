@@ -41,6 +41,6 @@ export class CacheManager implements ICacheManager {
     }
 
     async setItemAsync<T>(key: string, item: T) {
-        this._store.setItem(key, item as any)
+        this._store.setItem(key, { entry: item, entryDate: Date.now() } as ICacheItem<T> as any )
     }
 }
