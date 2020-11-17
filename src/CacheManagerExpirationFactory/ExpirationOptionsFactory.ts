@@ -15,7 +15,7 @@ export class ExpirationOptionsFactory implements
         }
         useSlidingExpiration(miliseconds: number) {
             this._expirationFunction = (cacheItem : IBaseCacheItem) => {
-                return cacheItem.entryDate < Date.now() + miliseconds
+                return cacheItem.entryDate < Date.now() - miliseconds
             }
             return this as any as IExpirationOptionsAddonsFactory
         }

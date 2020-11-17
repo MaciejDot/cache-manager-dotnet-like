@@ -5,7 +5,7 @@ export class ExpirationOptionsFactory {
     }
     useSlidingExpiration(miliseconds) {
         this._expirationFunction = (cacheItem) => {
-            return cacheItem.entryDate < Date.now() + miliseconds;
+            return cacheItem.entryDate < Date.now() - miliseconds;
         };
         return this;
     }
