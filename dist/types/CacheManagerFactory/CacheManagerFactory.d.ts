@@ -19,3 +19,4 @@ export declare class CacheManagerFactory implements ICacheManagerFactory, ICache
     useLocalStorage(): this;
     useSessionStorage(): this;
 }
+//# sourceMappingURL=CacheManagerFactory.d.ts.map

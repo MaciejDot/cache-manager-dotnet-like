@@ -40,6 +40,7 @@ export class CacheManagerFactory implements ICacheManagerFactory,
     return this
   }
   useCustomStore(store: IStore) {
+    this._store = store
     return this
   }
   useInMemoryStore() {

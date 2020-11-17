@@ -1,0 +1,1 @@
+{"version":3,"file":"ICacheManagerFactory.d.ts","sourceRoot":"src/","sources":["CacheManagerFactory/ICacheManagerFactory.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,yBAAyB,EAAE,MAAM,6BAA6B,CAAC;AAExE,MAAM,WAAW,oBAAoB;IACjC;;;;KAIC;IACD,YAAY,EAAE,CAAC,SAAS,EAAE,MAAM,KAAK,yBAAyB,CAAA;CAC/D"}

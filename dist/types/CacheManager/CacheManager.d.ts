@@ -10,3 +10,4 @@ export declare class CacheManager implements ICacheManager {
     getItemAsync<T>(key: string): Promise<T>;
     setItemAsync<T>(key: string, item: T): Promise<void>;
 }
+//# sourceMappingURL=CacheManager.d.ts.map

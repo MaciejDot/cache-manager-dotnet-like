@@ -1,0 +1,1 @@
+{"version":3,"file":"ICacheManagerOptions.d.ts","sourceRoot":"src/","sources":["CacheManagerOptions/ICacheManagerOptions.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,kBAAkB,EAAE,MAAM,yCAAyC,CAAC;AAC7E,OAAO,EAAE,MAAM,EAAE,MAAM,iBAAiB,CAAC;AAEzC,MAAM,WAAW,oBAAoB;IACjC,SAAS,EAAE,MAAM,CAAA;IACjB,KAAK,EAAE,MAAM,CAAA;IACb,iBAAiB,EAAE,kBAAkB,CAAA;CACxC"}

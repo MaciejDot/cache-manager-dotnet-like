@@ -2,10 +2,11 @@
   "name": "cache-manager-dotnet-like",
   "version": "1.0.5",
   "description": "Package for frontend caching",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
+  "readme": "Package that enables configurable advanced frontend caching",
   "types": "dist/types/index.d.ts",
   "typings": "dist/types/index.d.ts",
-  "module": "dist/index.js",
+  "module": "dist/src/index.js",
   "scripts": {
     "build": "tsc --project tsconfig.json"
   },

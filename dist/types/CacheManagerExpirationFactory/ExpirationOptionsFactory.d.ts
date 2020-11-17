@@ -8,3 +8,4 @@ export declare class ExpirationOptionsFactory implements IExpirationOptionsFacto
     useSlidingExpiration(miliseconds: number): IExpirationOptionsAddonsFactory;
     build(): IExpirationOptions;
 }
+//# sourceMappingURL=ExpirationOptionsFactory.d.ts.map

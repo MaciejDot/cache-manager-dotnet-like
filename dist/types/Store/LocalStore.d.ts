@@ -6,3 +6,4 @@ export declare class LocalStore implements IStore {
     getAllKeys(): Promise<string[]>;
     deleteItem(key: string): Promise<void>;
 }
+//# sourceMappingURL=LocalStore.d.ts.map

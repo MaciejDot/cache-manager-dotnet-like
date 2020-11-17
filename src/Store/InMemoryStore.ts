@@ -14,7 +14,7 @@ export class InMemoryStore implements IStore {
     getAllKeys() {
       return new Promise<string[]>(() => {
         const keys: string[] = []
-        this._map.forEach((value, key) => keys.push(key))
+        this._map.forEach(( _, key) => keys.push(key))
         return keys
       })
     }

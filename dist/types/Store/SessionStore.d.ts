@@ -6,3 +6,4 @@ export declare class SessionStore implements IStore {
     getAllKeys(): Promise<string[]>;
     deleteItem(key: string): Promise<void>;
 }
+//# sourceMappingURL=SessionStore.d.ts.map

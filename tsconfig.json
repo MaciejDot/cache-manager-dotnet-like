@@ -3,6 +3,8 @@
     "target": "esnext",
     "module": "esnext",
     "rootDir": "src",
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
     "strict": true,
     "importHelpers": true,
     "noEmitOnError": true,
@@ -11,7 +13,7 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": "./",
-    "outDir": "dist/",
+    "outDir": "dist/src",
     "resolveJsonModule": true,
     "noImplicitAny":false,
     "declaration": true,
@@ -21,17 +23,21 @@
     "importsNotUsedAsValues": "preserve",
     "listEmittedFiles": true,
     "useDefineForClassFields": true,
-    //"types": ["./src/index.ts"],
-    //"typeRoots": ["src"]
+    "isolatedModules": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "pretty": true,
+    "noErrorTruncation": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true,
+    "sourceRoot": "src",
+    "declarationMap": true,
+   "strictPropertyInitialization": true,
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "filesGlob": [
-    "!./node_modules/**"
-  ],
   "include": [
-    //"./src/**/*",
-    "src/index.ts"
+    "./src/**/*.ts",
   ]
 }

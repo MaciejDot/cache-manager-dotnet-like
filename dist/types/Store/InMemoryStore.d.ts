@@ -7,3 +7,4 @@ export declare class InMemoryStore implements IStore {
     getAllKeys(): Promise<string[]>;
     deleteItem(key: string): Promise<void>;
 }
+//# sourceMappingURL=InMemoryStore.d.ts.map
