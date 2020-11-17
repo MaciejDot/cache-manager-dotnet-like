@@ -36,4 +36,3 @@ export interface ICacheManager {
   */
     deleteItemAsync: (key: string) => Promise<void>;
 }
-//# sourceMappingURL=ICacheManager.d.ts.map

@@ -6,7 +6,7 @@
   "readme": "Package that enables configurable advanced frontend caching",
   "types": "dist/types/index.d.ts",
   "typings": "dist/types/index.d.ts",
-  "module": "dist/src/index.js",
+  "module": "dist/js/index.js",
   "scripts": {
     "build": "tsc --project tsconfig.json"
   },

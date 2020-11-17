@@ -5,4 +5,3 @@ export interface ICacheManagerOptions {
     store: IStore;
     expirationOptions: IExpirationOptions;
 }
-//# sourceMappingURL=ICacheManagerOptions.d.ts.map

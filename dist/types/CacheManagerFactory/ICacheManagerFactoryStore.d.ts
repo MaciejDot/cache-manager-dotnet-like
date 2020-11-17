@@ -20,4 +20,3 @@ export interface ICacheManagerFactoryStore {
  */
     useSessionStorage: () => ICacheManagerFactoryExpiration;
 }
-//# sourceMappingURL=ICacheManagerFactoryStore.d.ts.map

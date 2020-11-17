@@ -10,8 +10,7 @@ export declare class CacheManagerFactory implements ICacheManagerFactory, ICache
     private _namespace;
     private _store;
     private _expirationOptions;
-    useNamespace(namespace: string): ICacheManagerFactoryStore;
-    useLogging(): this;
+    useNamespace(namespace: string): this;
     build(): ICacheManager;
     useExpiration(expirationOptionsFunction: (expirationOptions: IExpirationOptionsFactory) => IExpirationOptions): this;
     useCustomStore(store: IStore): this;
@@ -19,4 +18,3 @@ export declare class CacheManagerFactory implements ICacheManagerFactory, ICache
     useLocalStorage(): this;
     useSessionStorage(): this;
 }
-//# sourceMappingURL=CacheManagerFactory.d.ts.map

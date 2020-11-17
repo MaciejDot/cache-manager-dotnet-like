@@ -7,4 +7,3 @@ export interface ICacheManagerFactory {
    */
     useNamespace: (namespace: string) => ICacheManagerFactoryStore;
 }
-//# sourceMappingURL=ICacheManagerFactory.d.ts.map

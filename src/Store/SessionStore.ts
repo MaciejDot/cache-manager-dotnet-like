@@ -1,8 +1,8 @@
 import { IStore } from "./IStore";
 
 export class SessionStore implements IStore {
-    getItem<T>(key: string) {
-      return new Promise<T>((resolve) => resolve(JSON.parse(sessionStorage.getItem(key) as string) as T))
+    getItem(key: string) {
+      return new Promise((resolve) => resolve(JSON.parse(sessionStorage.getItem(key) as string)))
     }
     exist(key: string) {
       return new Promise<boolean>((resolve) => resolve(sessionStorage.getItem(key) !== null))

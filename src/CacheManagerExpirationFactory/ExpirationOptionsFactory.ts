@@ -1,7 +1,7 @@
 import { IExpirationOptionsFactory } from "./IExpirationOptionsFactory";
 import { IExpirationOptionsAddonsFactory } from "./IExpirationOptionsAddonsFactory";
 import { IBaseCacheItem } from "../CacheItem/IBaseCacheItem"
-import { IExpirationOptions } from 'src/ExpirationOptions/IExpirationOptions';
+import { IExpirationOptions } from '../ExpirationOptions/IExpirationOptions';
 
 export class ExpirationOptionsFactory implements
     IExpirationOptionsFactory,

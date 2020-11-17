@@ -14,4 +14,3 @@ export interface IExpirationOptionsFactory {
 */
     useCustomExpiration: (isExpired: (item: IBaseCacheItem) => boolean) => IExpirationOptionsAddonsFactory;
 }
-//# sourceMappingURL=IExpirationOptionsFactory.d.ts.map

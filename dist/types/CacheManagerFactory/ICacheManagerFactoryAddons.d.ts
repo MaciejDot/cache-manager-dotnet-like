@@ -5,4 +5,3 @@ export interface ICacheManagerFactoryAddons {
   */
     build: () => ICacheManager;
 }
-//# sourceMappingURL=ICacheManagerFactoryAddons.d.ts.map

@@ -1,1 +1,0 @@
-{"version":3,"file":"IExpirationOptionsAddonsFactory.d.ts","sourceRoot":"src/","sources":["CacheManagerExpirationFactory/IExpirationOptionsAddonsFactory.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,kBAAkB,EAAE,MAAM,yCAAyC,CAAC;AAE7E,MAAM,WAAW,+BAA+B;IAC5C,KAAK,EAAE,MAAM,kBAAkB,CAAA;CAClC"}

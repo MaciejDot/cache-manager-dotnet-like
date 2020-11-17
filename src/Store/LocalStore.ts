@@ -1,8 +1,8 @@
 import { IStore } from "./IStore";
 
 export class LocalStore implements IStore {
-    getItem<T>(key: string) {
-      return new Promise<T>((resolve) => resolve(JSON.parse(localStorage.getItem(key) as string) as T))
+    getItem(key: string) {
+      return new Promise((resolve) => resolve(JSON.parse(localStorage.getItem(key) as string)))
     }
     exist(key: string) {
       return new Promise<boolean>((resolve) => resolve(localStorage.getItem(key) !== null))

@@ -16,22 +16,19 @@ export class CacheManagerFactory implements ICacheManagerFactory,
   ICacheManagerFactoryStore,
   ICacheManagerFactoryExpiration,
   ICacheManagerFactoryAddons {
-  private _namespace: string = ""
+  private _namespace: string | undefined
   private _store: IStore | undefined
   private _expirationOptions: IExpirationOptions | undefined
 
 
   useNamespace(namespace: string) {
     this._namespace = namespace
-    return this as any as ICacheManagerFactoryStore
-  }
-  useLogging() {
     return this
   }
   build() {
     return new CacheManager({
-      store: this._store as any as IStore,
-      namespace: this._namespace,
+      store: this._store as IStore,
+      namespace: this._namespace as string,
       expirationOptions: this._expirationOptions as IExpirationOptions
     }) as ICacheManager
   }

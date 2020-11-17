@@ -1,1 +1,0 @@
-{"version":3,"file":"IExpirationOptions.d.ts","sourceRoot":"src/","sources":["ExpirationOptions/IExpirationOptions.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,cAAc,EAAE,MAAM,8BAA8B,CAAC;AAE9D,MAAM,WAAW,kBAAkB;IAC/B,kBAAkB,EAAG,CAAC,SAAS,EAAE,cAAc,KAAK,OAAO,CAAA;CAC9D"}

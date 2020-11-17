@@ -2,7 +2,7 @@ import { IStore } from "../Store/IStore"
 import { ICacheManager } from "./ICacheManager"
 import { ICacheManagerOptions } from "../CacheManagerOptions/ICacheManagerOptions"
 import { IBaseCacheItem } from "../CacheItem/IBaseCacheItem"
-import { ICacheItem } from 'src/CacheItem/ICacheItem'
+import { ICacheItem } from '../CacheItem/ICacheItem'
 import { KeyNotFoundException } from "../Exceptions/KeyNotFoundException"
 export class CacheManager implements ICacheManager {
     private _store: IStore
@@ -14,7 +14,7 @@ export class CacheManager implements ICacheManager {
             deleteItem: (key: string) => options.store.deleteItem(`${prefix}${key}`),
             getItem: (key: string) => options.store.getItem(`${prefix}${key}`),
             getAllKeys: async () => (await options.store.getAllKeys()).filter(key => key.startsWith(prefix)).map(key => key.substr(prefix.length)),
-            setItem: (key: string, item: any) => options.store.setItem(`${prefix}${key}`, item),
+            setItem: (key: string, item: unknown) => options.store.setItem(`${prefix}${key}`, item),
             exist: (key: string) => options.store.exist(`${prefix}${key}`)
         }
         this._expirationFunction = options.expirationOptions.expirationFunction
@@ -22,7 +22,7 @@ export class CacheManager implements ICacheManager {
 
     async existAsync(key: string) {
         return await this._store.exist(key) && 
-            !this._expirationFunction(await this._store.getItem(key)) 
+            !this._expirationFunction(await this._store.getItem(key) as IBaseCacheItem) 
     }
 
     getAllKeysAsync() {

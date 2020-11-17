@@ -7,4 +7,3 @@ export interface ICacheManagerFactoryExpiration {
     */
     useExpiration: (expirationOptionsFunction: (expirationOptions: IExpirationOptionsFactory) => IExpirationOptions) => ICacheManagerFactoryAddons;
 }
-//# sourceMappingURL=ICacheManagerFactoryExpiration.d.ts.map
