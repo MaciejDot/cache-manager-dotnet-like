@@ -4,9 +4,6 @@ import { SessionStore } from "../Store/SessionStore";
 import { InMemoryStore } from "../Store/InMemoryStore";
 import { ExpirationOptionsFactory } from "../CacheManagerExpirationFactory/ExpirationOptionsFactory";
 export class CacheManagerFactory {
-    _namespace;
-    _store;
-    _expirationOptions;
     useNamespace(namespace) {
         this._namespace = namespace;
         return this;

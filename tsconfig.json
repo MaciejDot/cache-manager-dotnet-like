@@ -19,8 +19,6 @@
     "allowJs": false,
     "alwaysStrict": true,
     "declarationDir": "dist/types",
-    "importsNotUsedAsValues": "remove",
-    "useDefineForClassFields": true,
     "suppressImplicitAnyIndexErrors": true,
     "pretty": true,
     "noErrorTruncation": true,

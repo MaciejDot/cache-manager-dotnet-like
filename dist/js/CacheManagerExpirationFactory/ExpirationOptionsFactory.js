@@ -1,5 +1,4 @@
 export class ExpirationOptionsFactory {
-    _expirationFunction;
     useCustomExpiration(isExpired) {
         this._expirationFunction = isExpired;
         return this;

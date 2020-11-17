@@ -1,7 +1,5 @@
 import { KeyNotFoundException } from "../Exceptions/KeyNotFoundException";
 export class CacheManager {
-    _store;
-    _expirationFunction;
     constructor(options) {
         const prefix = `__CacheManager__${options.namespace}__`;
         this._store = {

@@ -1,5 +1,7 @@
 export class InMemoryStore {
-    _map = new Map();
+    constructor() {
+        this._map = new Map();
+    }
     getItem(key) {
         return new Promise(() => this._map.get(key));
     }
