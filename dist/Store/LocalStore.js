@@ -1,3 +1,4 @@
+import "./IStore";
 export class LocalStore {
     getItem(key) {
         return new Promise((resolve) => resolve(JSON.parse(localStorage.getItem(key))));

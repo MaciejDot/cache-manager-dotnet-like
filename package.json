@@ -3,16 +3,15 @@
   "version": "1.0.5",
   "description": "Package for frontend caching",
   "main": "dist/index.js",
-  "types": "types/index.d.ts",
-  "typings": "types/index.d.ts",
+  "types": "dist/types/index.d.ts",
+  "typings": "dist/types/index.d.ts",
   "module": "dist/index.js",
   "scripts": {
     "build": "tsc --project tsconfig.json"
   },
   "sideEffects": false,
   "files": [
-    "dist",
-    "types"
+    "dist"
   ],
   "keywords": [
     "cache",

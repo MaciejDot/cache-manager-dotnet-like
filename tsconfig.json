@@ -2,8 +2,10 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
+    "rootDir": "src",
     "strict": true,
     "importHelpers": true,
+    "noEmitOnError": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -14,9 +16,13 @@
     "noImplicitAny":false,
     "declaration": true,
     "allowJs": false,
-    "alwaysStrict": true,
-    "declarationDir": "types",
-    "typeRoots": ["src"]
+    "alwaysStrict": false,
+    "declarationDir": "dist/types",
+    "importsNotUsedAsValues": "preserve",
+    "listEmittedFiles": true,
+    "useDefineForClassFields": true,
+    //"types": ["./src/index.ts"],
+    //"typeRoots": ["src"]
   },
   "exclude": [
     "node_modules"
@@ -25,7 +31,7 @@
     "!./node_modules/**"
   ],
   "include": [
-    "./src/**/*",
+    //"./src/**/*",
     "src/index.ts"
   ]
 }

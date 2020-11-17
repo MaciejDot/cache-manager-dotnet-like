@@ -1,12 +1,20 @@
+import '../CacheManagerExpirationFactory/IExpirationOptionsFactory';
 import { CacheManager } from "../CacheManager/CacheManager";
+import "../CacheManager/ICacheManager";
+import "../ExpirationOptions/IExpirationOptions";
+import "../Store/IStore";
+import './ICacheManagerFactory';
+import './ICacheManagerFactoryAddons';
+import './ICacheManagerFactoryExpiration';
+import './ICacheManagerFactoryStore';
 import { LocalStore } from "../Store/LocalStore";
 import { SessionStore } from "../Store/SessionStore";
 import { InMemoryStore } from "../Store/InMemoryStore";
 import { ExpirationOptionsFactory } from "../CacheManagerExpirationFactory/ExpirationOptionsFactory";
 export class CacheManagerFactory {
-    constructor() {
-        this._namespace = "";
-    }
+    _namespace = "";
+    _store;
+    _expirationOptions;
     useNamespace(namespace) {
         this._namespace = namespace;
         return this;

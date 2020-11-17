@@ -1,5 +1,12 @@
+import "../Store/IStore";
+import "./ICacheManager";
+import "../CacheManagerOptions/ICacheManagerOptions";
+import "../CacheItem/IBaseCacheItem";
+import 'src/CacheItem/ICacheItem';
 import { KeyNotFoundException } from "../Exceptions/KeyNotFoundException";
 export class CacheManager {
+    _store;
+    _expirationFunction;
     constructor(options) {
         const prefix = `__CacheManager__${options.namespace}__`;
         this._store = {
@@ -28,7 +35,7 @@ export class CacheManager {
         return (await this._store.getItem(key)).entry;
     }
     async setItemAsync(key, item) {
-        this._store.setItem(key, item);
+        this._store.setItem(key, { entry: item, entryDate: Date.now() });
     }
 }
 //# sourceMappingURL=CacheManager.js.map

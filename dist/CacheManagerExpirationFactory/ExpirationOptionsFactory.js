@@ -1,4 +1,9 @@
+import "./IExpirationOptionsFactory";
+import "./IExpirationOptionsAddonsFactory";
+import "../CacheItem/IBaseCacheItem";
+import 'src/ExpirationOptions/IExpirationOptions';
 export class ExpirationOptionsFactory {
+    _expirationFunction;
     useCustomExpiration(isExpired) {
         this._expirationFunction = isExpired;
         return this;

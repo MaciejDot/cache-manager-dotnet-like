@@ -1,3 +1,4 @@
+import "./IStore";
 export class SessionStore {
     getItem(key) {
         return new Promise((resolve) => resolve(JSON.parse(sessionStorage.getItem(key))));
