@@ -26,7 +26,7 @@ export class CacheManager implements ICacheManager {
         return joined;
     }
 
-    private async clean() {
+    async cleanAsync() {
         const keys = await this._store.getAllKeys()
         keys.forEach(async key => {
             if (this._expirationFunction(await this._store.getItem(key) as IBaseCacheItem)) {
@@ -37,7 +37,7 @@ export class CacheManager implements ICacheManager {
 
     constructor(options: ICacheManagerOptions) {
         const prefix = `__CacheManager__${options.namespace}__`
-        this.clean = this.clean.bind(this)
+        this.cleanAsync = this.cleanAsync.bind(this)
         this._store = {
             deleteItem: async (key: string) => {
                 const entry = await options.store.getItem(`${prefix}${key}`) as IBaseCacheItem;
@@ -67,7 +67,7 @@ export class CacheManager implements ICacheManager {
         this._defaultExpiration = options.expirationOptions.defaultExpirtaionOption;
         this._subscribtionFunctions = options.subscribeToChange
         if(options.cleanOptions.type === "periodically"){
-            setInterval(this.clean, options.cleanOptions.options.miliseconds)
+            setInterval(this.cleanAsync, options.cleanOptions.options.miliseconds)
         }
     }
 

@@ -4,7 +4,7 @@ import { ExpirationMustBeSetException } from '../Exceptions/ExpirationMustBeSetE
 export class CacheManager {
     constructor(options) {
         const prefix = `__CacheManager__${options.namespace}__`;
-        this.clean = this.clean.bind(this);
+        this.cleanAsync = this.cleanAsync.bind(this);
         this._store = {
             deleteItem: async (key) => {
                 const entry = await options.store.getItem(`${prefix}${key}`);
@@ -34,7 +34,7 @@ export class CacheManager {
         this._defaultExpiration = options.expirationOptions.defaultExpirtaionOption;
         this._subscribtionFunctions = options.subscribeToChange;
         if (options.cleanOptions.type === "periodically") {
-            setInterval(this.clean, options.cleanOptions.options.miliseconds);
+            setInterval(this.cleanAsync, options.cleanOptions.options.miliseconds);
         }
     }
     chain(expirationFillters) {
@@ -45,7 +45,7 @@ export class CacheManager {
         }
         return joined;
     }
-    async clean() {
+    async cleanAsync() {
         const keys = await this._store.getAllKeys();
         keys.forEach(async (key) => {
             if (this._expirationFunction(await this._store.getItem(key))) {

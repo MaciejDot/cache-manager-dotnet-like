@@ -2,6 +2,10 @@ import { IBaseCacheItem } from '../CacheItem/IBaseCacheItem';
 import { IConfigurableBaseCacheItem } from '../CacheItem/IConfigurableBaseCacheItem';
 export interface ICacheManager {
     /**
+     * clean async all expired records from cache
+     */
+    cleanAsync: () => Promise<void>;
+    /**
   * get item
   *
   * @param key item key

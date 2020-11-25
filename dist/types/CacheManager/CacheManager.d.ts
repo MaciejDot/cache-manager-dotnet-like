@@ -8,7 +8,7 @@ export declare class CacheManager implements ICacheManager {
     private _defaultExpiration;
     private _subscribtionFunctions;
     private chain;
-    private clean;
+    cleanAsync(): Promise<void>;
     constructor(options: ICacheManagerOptions);
     getCacheItemAsync<T>(key: string): Promise<IBaseCacheItem<T>>;
     setCacheItemAsync<T>(key: string, item: IConfigurableBaseCacheItem<T>): Promise<void>;
