@@ -6,6 +6,10 @@ export interface ICacheManager {
      */
     cleanAsync: () => Promise<void>;
     /**
+     * emit async values
+     */
+    emitValuesAsync: () => Promise<void>;
+    /**
   * get item
   *
   * @param key item key
