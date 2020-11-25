@@ -20,7 +20,8 @@ export class CacheManager implements ICacheManager {
     private chain(expirationFillters: ExpirationFillter[]): ExpirationFunction {
         let joined: ExpirationFunction = () => false;
         for (let index = expirationFillters.length - 1; index >= 0; index -= 1) {
-            joined = (item) => expirationFillters[index](item, () => joined(item))
+            let help = joined;
+            joined = (item) => expirationFillters[index](item, () => help(item))
         }
         return joined;
     }
