@@ -69,6 +69,20 @@ export class CacheManager implements ICacheManager {
         if(options.cleanOptions.type === "periodically"){
             setInterval(this.cleanAsync, options.cleanOptions.options.miliseconds)
         }
+        this.emitInitialValues.bind(this)()
+    }
+
+    private async emitInitialValues(){
+        const keys = await this.getAllKeysAsync();
+        for(let key in keys){
+            const item = (await this._store.getItem(key)) as IBaseCacheItem;
+            this._subscribtionFunctions.forEach(subscribtion => subscribtion({
+                entry: item,
+                entryKey: key,
+                entryState: "init"
+            },this))
+        }
+        await this.cleanAsync();
     }
 
     async getCacheItemAsync<T>(key: string) {

@@ -10,6 +10,7 @@ export declare class CacheManager implements ICacheManager {
     private chain;
     cleanAsync(): Promise<void>;
     constructor(options: ICacheManagerOptions);
+    private emitInitialValues;
     getCacheItemAsync<T>(key: string): Promise<IBaseCacheItem<T>>;
     setCacheItemAsync<T>(key: string, item: IConfigurableBaseCacheItem<T>): Promise<void>;
     existAsync(key: string): Promise<boolean>;

@@ -36,6 +36,7 @@ export class CacheManager {
         if (options.cleanOptions.type === "periodically") {
             setInterval(this.cleanAsync, options.cleanOptions.options.miliseconds);
         }
+        this.emitInitialValues.bind(this)();
     }
     chain(expirationFillters) {
         let joined = () => false;
@@ -52,6 +53,18 @@ export class CacheManager {
                 await this.deleteItemAsync(key);
             }
         });
+    }
+    async emitInitialValues() {
+        const keys = await this.getAllKeysAsync();
+        for (let key in keys) {
+            const item = (await this._store.getItem(key));
+            this._subscribtionFunctions.forEach(subscribtion => subscribtion({
+                entry: item,
+                entryKey: key,
+                entryState: "init"
+            }, this));
+        }
+        await this.cleanAsync();
     }
     async getCacheItemAsync(key) {
         if (!await this.existAsync(key)) {
