@@ -1,6 +1,6 @@
 {
   "name": "cache-manager-dotnet-like",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Package for frontend caching",
   "main": "dist/src/index.js",
   "readme": "Package that enables configurable advanced frontend caching",
