@@ -4,12 +4,14 @@ import { ExpirationMustBeSetException } from '../Exceptions/ExpirationMustBeSetE
 export class CacheManager {
     constructor(options) {
         const prefix = `__CacheManager__${options.namespace}__`;
+        this.clean = this.clean.bind(this);
         this._store = {
             deleteItem: async (key) => {
                 const entry = await options.store.getItem(`${prefix}${key}`);
                 this._subscribtionFunctions.forEach(subscribtion => subscribtion({
                     entry: entry,
-                    entryState: "deleted"
+                    entryState: "deleted",
+                    entryKey: key
                 }, this));
                 return options.store.deleteItem(`${prefix}${key}`);
             },
@@ -18,6 +20,7 @@ export class CacheManager {
             setItem: (key, item) => {
                 this._subscribtionFunctions.forEach(subscribtion => subscribtion({
                     entry: item,
+                    entryKey: key,
                     entryState: "set"
                 }, this));
                 return options.store.setItem(`${prefix}${key}`, item);

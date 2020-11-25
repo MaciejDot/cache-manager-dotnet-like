@@ -36,12 +36,14 @@ export class CacheManager implements ICacheManager {
 
     constructor(options: ICacheManagerOptions) {
         const prefix = `__CacheManager__${options.namespace}__`
+        this.clean = this.clean.bind(this)
         this._store = {
             deleteItem: async (key: string) => {
                 const entry = await options.store.getItem(`${prefix}${key}`) as IBaseCacheItem;
                 this._subscribtionFunctions.forEach(subscribtion => subscribtion({
                     entry: entry,
-                    entryState: "deleted"
+                    entryState: "deleted",
+                    entryKey: key
                 }, this));
                 return options.store.deleteItem(`${prefix}${key}`);
             },
@@ -50,6 +52,7 @@ export class CacheManager implements ICacheManager {
             setItem: (key: string, item: unknown) => {
                 this._subscribtionFunctions.forEach(subscribtion => subscribtion({
                     entry: item as IBaseCacheItem,
+                    entryKey: key,
                     entryState: "set"
                 }, this));
                 return options.store.setItem(`${prefix}${key}`, item)
