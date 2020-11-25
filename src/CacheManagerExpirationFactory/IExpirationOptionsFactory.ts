@@ -1,18 +1,25 @@
-import { IBaseCacheItem } from "../CacheItem/IBaseCacheItem";
-import {IExpirationOptionsAddonsFactory} from "./IExpirationOptionsAddonsFactory"
+import { IExpirationOptionsAddonsFactory } from "./IExpirationOptionsAddonsFactory"
 
-export interface IExpirationOptionsFactory 
-{
-        /**
-   * set time of expiration in miliseconds
-   *
-   * @param miliseconds  time in miliseconds after which record will no longer be cached
-   */
+export interface IExpirationOptionsFactory {
+    /**
+* Use none expiration function
+* 
+* 
+*/
+    useNoExpiration: () => IExpirationOptionsAddonsFactory
+
+    /**
+* Use never expiration function
+* 
+* 
+*/
+useNeverExpiration: () => IExpirationOptionsAddonsFactory
+    /**
+* set time of expiration in miliseconds
+*
+* default expiration function for items with unset expiration
+* 
+* @param miliseconds  time in miliseconds after which record will no longer be cached
+*/
     useSlidingExpiration: (miliseconds: number) => IExpirationOptionsAddonsFactory
-        /**
-   * set expiration function
-   *
-   * @param isExpired  expiration function
-   */
-    useCustomExpiration: (isExpired: (item: IBaseCacheItem) => boolean) => IExpirationOptionsAddonsFactory
 }

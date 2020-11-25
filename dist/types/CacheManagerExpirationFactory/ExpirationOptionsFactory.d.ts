@@ -1,10 +1,7 @@
 import { IExpirationOptionsFactory } from "./IExpirationOptionsFactory";
-import { IExpirationOptionsAddonsFactory } from "./IExpirationOptionsAddonsFactory";
-import { IBaseCacheItem } from "../CacheItem/IBaseCacheItem";
-import { IExpirationOptions } from '../ExpirationOptions/IExpirationOptions';
-export declare class ExpirationOptionsFactory implements IExpirationOptionsFactory, IExpirationOptionsAddonsFactory {
-    private _expirationFunction?;
-    useCustomExpiration(isExpired: (cacheItem: IBaseCacheItem) => boolean): IExpirationOptionsAddonsFactory;
-    useSlidingExpiration(miliseconds: number): IExpirationOptionsAddonsFactory;
-    build(): IExpirationOptions;
+import { ExpirationOptionsAddonsFactory } from './ExpirationOptionsAddonsFactory';
+export declare class ExpirationOptionsFactory implements IExpirationOptionsFactory {
+    useNeverExpiration(): ExpirationOptionsAddonsFactory;
+    useNoExpiration(): ExpirationOptionsAddonsFactory;
+    useSlidingExpiration(miliseconds: number): ExpirationOptionsAddonsFactory;
 }

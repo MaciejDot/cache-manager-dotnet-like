@@ -9,13 +9,7 @@ export class SessionStore {
         return new Promise((resolve) => resolve(sessionStorage.setItem(key, JSON.stringify(item))));
     }
     getAllKeys() {
-        return new Promise((resolve) => {
-            const array = [];
-            for (let index = 0; index < sessionStorage.length; index += 1) {
-                array.push(sessionStorage.key(index));
-            }
-            resolve(array);
-        });
+        return new Promise((resolve) => resolve(Object.keys(sessionStorage)));
     }
     deleteItem(key) {
         return new Promise((resolve) => resolve(sessionStorage.removeItem(key)));

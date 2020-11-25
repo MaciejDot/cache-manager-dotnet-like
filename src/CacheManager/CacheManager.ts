@@ -2,27 +2,91 @@ import { IStore } from "../Store/IStore"
 import { ICacheManager } from "./ICacheManager"
 import { ICacheManagerOptions } from "../CacheManagerOptions/ICacheManagerOptions"
 import { IBaseCacheItem } from "../CacheItem/IBaseCacheItem"
-import { ICacheItem } from '../CacheItem/ICacheItem'
 import { KeyNotFoundException } from "../Exceptions/KeyNotFoundException"
+import { ExpirationFillter } from '../ExpirationFunctions/ExpirationFillter'
+import { isExpiredAbsolute, isExpiredSliding, neverExpires } from '../ExpirationFunctions/ExpirationFunctions'
+import { ExpirationFunction } from '../ExpirationFunctions/ExpirationFunction'
+import { IConfigurableBaseCacheItem } from '../CacheItem/IConfigurableBaseCacheItem'
+import { DefaultExpirationOption } from '../ExpirationOptions/IExpirationOptions'
+import { ExpirationMustBeSetException } from '../Exceptions/ExpirationMustBeSetException'
+import { SubscribtionFunction } from '../CacheManagerOptions/SubscribtionFunction'
+
 export class CacheManager implements ICacheManager {
     private _store: IStore
-    private _expirationFunction: (cacheItem: IBaseCacheItem) => boolean
+    private _expirationFunction: ExpirationFunction;
+    private _defaultExpiration: DefaultExpirationOption;
+    private _subscribtionFunctions: SubscribtionFunction[];
+
+    private chain(expirationFillters: ExpirationFillter[]): ExpirationFunction {
+        let joined: ExpirationFunction = () => false;
+        for (let index = expirationFillters.length - 1; index >= 0; index -= 1) {
+            joined = (item) => expirationFillters[index](item, () => joined(item))
+        }
+        return joined;
+    }
+
+    private async clean() {
+        const keys = await this._store.getAllKeys()
+        keys.forEach(async key => {
+            if (this._expirationFunction(await this._store.getItem(key) as IBaseCacheItem)) {
+                await this.deleteItemAsync(key)
+            }
+        })
+    }
 
     constructor(options: ICacheManagerOptions) {
         const prefix = `__CacheManager__${options.namespace}__`
         this._store = {
-            deleteItem: (key: string) => options.store.deleteItem(`${prefix}${key}`),
+            deleteItem: async (key: string) => {
+                const entry = await options.store.getItem(`${prefix}${key}`) as IBaseCacheItem;
+                this._subscribtionFunctions.forEach(subscribtion => subscribtion({
+                    entry: entry,
+                    entryState: "deleted"
+                }, this));
+                return options.store.deleteItem(`${prefix}${key}`);
+            },
             getItem: (key: string) => options.store.getItem(`${prefix}${key}`),
             getAllKeys: async () => (await options.store.getAllKeys()).filter(key => key.startsWith(prefix)).map(key => key.substr(prefix.length)),
-            setItem: (key: string, item: unknown) => options.store.setItem(`${prefix}${key}`, item),
+            setItem: (key: string, item: unknown) => {
+                this._subscribtionFunctions.forEach(subscribtion => subscribtion({
+                    entry: item as IBaseCacheItem,
+                    entryState: "set"
+                }, this));
+                return options.store.setItem(`${prefix}${key}`, item)
+            },
             exist: (key: string) => options.store.exist(`${prefix}${key}`)
         }
-        this._expirationFunction = options.expirationOptions.expirationFunction
+        this._expirationFunction = this.chain([neverExpires,
+            isExpiredAbsolute,
+            isExpiredSliding,
+            ...options.expirationOptions.expirationFillters]);
+        this._defaultExpiration = options.expirationOptions.defaultExpirtaionOption;
+        this._subscribtionFunctions = options.subscribeToChange
+        if(options.cleanOptions.type === "periodically"){
+            setInterval(this.clean, options.cleanOptions.options.miliseconds)
+        }
+    }
+
+    async getCacheItemAsync<T>(key: string) {
+        if (!await this.existAsync(key)) {
+            throw KeyNotFoundException(`key ${key} was not found`)
+        }
+        return ((await this._store.getItem(key)) as IBaseCacheItem<T>);
+    }
+
+    setCacheItemAsync<T>(key: string, item: IConfigurableBaseCacheItem<T>) {
+        return this._store.setItem(key, { ...item, entryDate: Date.now() } as IBaseCacheItem<T> as any)
     }
 
     async existAsync(key: string) {
-        return await this._store.exist(key) && 
-            !this._expirationFunction(await this._store.getItem(key) as IBaseCacheItem) 
+
+        if (await this._store.exist(key)) {
+            if (!this._expirationFunction(await this._store.getItem(key) as IBaseCacheItem)) {
+                return true
+            }
+            await this.deleteItemAsync(key);
+        }
+        return false;
     }
 
     getAllKeysAsync() {
@@ -34,13 +98,17 @@ export class CacheManager implements ICacheManager {
     }
 
     async getItemAsync<T>(key: string) {
-        if (!await this.existAsync(key)) {
-            throw KeyNotFoundException(`key ${key} was not found`)
-        }
-        return ((await this._store.getItem(key)) as ICacheItem<T>).entry
+        return (await this.getCacheItemAsync<T>(key)).entry
     }
 
     async setItemAsync<T>(key: string, item: T) {
-        this._store.setItem(key, { entry: item, entryDate: Date.now() } as ICacheItem<T> as any )
+        switch (this._defaultExpiration.type) {
+            case "notSet":
+                throw ExpirationMustBeSetException(`expiration of item with key ${key} must be set manually by setCacheItemAsync`)
+            case "never":
+                return this._store.setItem(key, { entry: item, entryDate: Date.now(), neverExpires: true } as IBaseCacheItem<T>)
+            case "sliding":
+                return this._store.setItem(key, { entry: item, entryDate: Date.now(), slidingExpirationTime: this._defaultExpiration.options.millisecondsSlide } as IBaseCacheItem<T>)
+        }
     }
 }

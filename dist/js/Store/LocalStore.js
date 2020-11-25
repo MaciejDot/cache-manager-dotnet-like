@@ -9,13 +9,7 @@ export class LocalStore {
         return new Promise((resolve) => resolve(localStorage.setItem(key, JSON.stringify(item))));
     }
     getAllKeys() {
-        return new Promise((resolve) => {
-            const array = [];
-            for (let index = 0; index < localStorage.length; index += 1) {
-                array.push(localStorage.key(index));
-            }
-            resolve(array);
-        });
+        return new Promise((resolve) => resolve(Object.keys(localStorage)));
     }
     deleteItem(key) {
         return new Promise((resolve) => resolve(localStorage.removeItem(key)));

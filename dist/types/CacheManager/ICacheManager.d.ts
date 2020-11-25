@@ -1,3 +1,5 @@
+import { IBaseCacheItem } from '../CacheItem/IBaseCacheItem';
+import { IConfigurableBaseCacheItem } from '../CacheItem/IConfigurableBaseCacheItem';
 export interface ICacheManager {
     /**
   * get item
@@ -10,6 +12,14 @@ export interface ICacheManager {
   */
     getItemAsync: <T>(key: string) => Promise<T>;
     /**
+ * get cache item
+ *
+ * @param key item key
+ *
+ * @param item item value
+ */
+    getCacheItemAsync: <T>(key: string) => Promise<IBaseCacheItem<T>>;
+    /**
   * set cache item
   *
   * @param key item key
@@ -17,6 +27,14 @@ export interface ICacheManager {
   * @param item item value
   */
     setItemAsync: <T>(key: string, item: T) => Promise<void>;
+    /**
+  * set cache item
+  *
+  * @param key item key
+  *
+  * @param item item value
+  */
+    setCacheItemAsync: <T>(key: string, item: IConfigurableBaseCacheItem<T>) => Promise<void>;
     /**
   * check if item exist in cache
   *

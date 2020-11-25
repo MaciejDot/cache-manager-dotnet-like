@@ -1,17 +1,21 @@
+import { ExpirationOptionsAddonsFactory } from './ExpirationOptionsAddonsFactory';
 export class ExpirationOptionsFactory {
-    useCustomExpiration(isExpired) {
-        this._expirationFunction = isExpired;
-        return this;
+    useNeverExpiration() {
+        return new ExpirationOptionsAddonsFactory({
+            type: "never"
+        });
+    }
+    useNoExpiration() {
+        return new ExpirationOptionsAddonsFactory({
+            type: "notSet"
+        });
     }
     useSlidingExpiration(miliseconds) {
-        this._expirationFunction = (cacheItem) => {
-            return cacheItem.entryDate < Date.now() - miliseconds;
-        };
-        return this;
-    }
-    build() {
-        return {
-            expirationFunction: this._expirationFunction
-        };
+        return new ExpirationOptionsAddonsFactory({
+            type: "sliding",
+            options: {
+                millisecondsSlide: miliseconds
+            }
+        });
     }
 }

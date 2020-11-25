@@ -1,4 +1,4 @@
-export const KeyNotFoundException = (message : string) => ({
+export const KeyNotFoundException = (message: string) => ({
     type: "KeyNotFoundException",
     message: message
 })

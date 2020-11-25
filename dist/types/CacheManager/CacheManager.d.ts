@@ -1,9 +1,17 @@
 import { ICacheManager } from "./ICacheManager";
 import { ICacheManagerOptions } from "../CacheManagerOptions/ICacheManagerOptions";
+import { IBaseCacheItem } from "../CacheItem/IBaseCacheItem";
+import { IConfigurableBaseCacheItem } from '../CacheItem/IConfigurableBaseCacheItem';
 export declare class CacheManager implements ICacheManager {
     private _store;
     private _expirationFunction;
+    private _defaultExpiration;
+    private _subscribtionFunctions;
+    private chain;
+    private clean;
     constructor(options: ICacheManagerOptions);
+    getCacheItemAsync<T>(key: string): Promise<IBaseCacheItem<T>>;
+    setCacheItemAsync<T>(key: string, item: IConfigurableBaseCacheItem<T>): Promise<void>;
     existAsync(key: string): Promise<boolean>;
     getAllKeysAsync(): Promise<string[]>;
     deleteItemAsync(key: string): Promise<void>;

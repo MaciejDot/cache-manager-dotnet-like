@@ -1,27 +1,22 @@
 import { IStore } from "./IStore";
 
 export class SessionStore implements IStore {
-    getItem(key: string) {
-      return new Promise((resolve) => resolve(JSON.parse(sessionStorage.getItem(key) as string)))
-    }
-    exist(key: string) {
-      return new Promise<boolean>((resolve) => resolve(sessionStorage.getItem(key) !== null))
-    }
-    setItem(key: string, item: any) {
-      return new Promise<void>((resolve) => resolve(sessionStorage.setItem(key, JSON.stringify(item))))
-    }
-    getAllKeys() {
-      return new Promise<string[]>((resolve) => {
-        const array : string[] = [];
-        for(let index =0; index < sessionStorage.length; index +=1)
-        {
-          array.push(sessionStorage.key(index) as string);
-        }
-        resolve(array)
-      }
-      )
-    }
-    deleteItem(key: string) {
-      return new Promise<void>((resolve) => resolve(sessionStorage.removeItem(key)))
-    }
+  getItem(key: string) {
+    return new Promise((resolve) => resolve(JSON.parse(sessionStorage.getItem(key) as string)))
   }
+  exist(key: string) {
+    return new Promise<boolean>((resolve) => resolve(sessionStorage.getItem(key) !== null))
+  }
+  setItem(key: string, item: any) {
+    return new Promise<void>((resolve) => resolve(sessionStorage.setItem(key, JSON.stringify(item))))
+  }
+  getAllKeys() {
+    return new Promise<string[]>((resolve) =>
+      resolve(Object.keys(sessionStorage))
+
+    )
+  }
+  deleteItem(key: string) {
+    return new Promise<void>((resolve) => resolve(sessionStorage.removeItem(key)))
+  }
+}

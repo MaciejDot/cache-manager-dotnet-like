@@ -1,24 +1,20 @@
 export class InMemoryStore {
     constructor() {
-        this._map = new Map();
+        this._map = {};
     }
     getItem(key) {
-        return new Promise(() => this._map.get(key));
+        return new Promise((resolve) => resolve(this._map.get(key)));
     }
     exist(key) {
-        return new Promise(() => this._map.has(key));
+        return new Promise((resolve) => resolve(this._map.has(key)));
     }
     setItem(key, item) {
-        return new Promise(() => this._map.set(key, item));
+        return new Promise((resolve) => resolve(this._map.set(key, item)));
     }
     getAllKeys() {
-        return new Promise(() => {
-            const keys = [];
-            this._map.forEach((_, key) => keys.push(key));
-            return keys;
-        });
+        return new Promise((resolve) => resolve(Object.keys(this._map)));
     }
     deleteItem(key) {
-        return new Promise(() => this._map.delete(key));
+        return new Promise((resolve) => resolve(this._map.delete(key)));
     }
 }

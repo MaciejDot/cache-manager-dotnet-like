@@ -9,14 +9,14 @@ export interface ICacheManagerFactoryStore {
     useCustomStore: (store: IStore) => ICacheManagerFactoryExpiration;
     /**
    * Use in memory (const) as state source for CacheManager
-*/
+  */
     useInMemoryStore: () => ICacheManagerFactoryExpiration;
     /**
     * Use localStorage as state source for CacheManager
- */
+  */
     useLocalStorage: () => ICacheManagerFactoryExpiration;
     /**
     * Use sessionStorage as state source for CacheManager
- */
+  */
     useSessionStorage: () => ICacheManagerFactoryExpiration;
 }
