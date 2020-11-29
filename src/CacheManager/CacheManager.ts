@@ -26,6 +26,10 @@ export class CacheManager implements ICacheManager {
         return joined;
     }
 
+    subscribe(subscribeFunction: SubscribtionFunction){
+        this._subscribtionFunctions.push(subscribeFunction);
+    }
+
     async cleanAsync() {
         const keys = await this._store.getAllKeys()
         keys.forEach(async key => {

@@ -1,3 +1,4 @@
+import { SubscribtionFunction } from 'src/CacheManagerOptions/SubscribtionFunction';
 import { IBaseCacheItem } from '../CacheItem/IBaseCacheItem';
 import { IConfigurableBaseCacheItem } from '../CacheItem/IConfigurableBaseCacheItem';
 
@@ -11,6 +12,12 @@ cleanAsync : ()=> Promise<void>
  * emit async values
  */
 emitValuesAsync : ()=> Promise<void>
+/** 
+* subscribe to change
+* @param subscribeFunction sunscribtion function
+*/
+
+subscribe: (subscribeFunction: SubscribtionFunction) => void
   /**
 * get item
 *
